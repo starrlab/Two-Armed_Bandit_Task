@@ -1,7 +1,7 @@
 /*************Variables************/
 const VERSION = "1";
 
-const DECIDE_DURATION = 20000; //ms
+const DECIDE_DURATION = 2000; //ms
 //settings
 let probability_start_left = [.8, .8, .8, .8, .2, .2, .2, .2];
 shuffleArray(probability_start_left);
@@ -45,6 +45,22 @@ let decide = {
 };
 //add this to timeline
 timeline.push(decide);
+
+let action = {
+    type: "html-keyboard-response",
+    choices: [KEYBOARD_PRESS_RIGHT, KEYBOARD_PRESS_LEFT],
+    stimulus: "<h1>Pull the Lever!</h1>" +
+        "<div class='container'>"+
+        "<div  '><img src='img/HandleLeft.png'></img>" +
+        "<p class='small'><strong>Press the ← key</strong></p></div>" +
+        "<div  '><img src='img/HandleRight.png'></img>" +
+        "<p class='small'><strong>Press the → key</strong></p></div>" +
+        "</div>",
+    on_finish: function (data) {
+    }
+};
+//add this to timeline
+timeline.push(action);
 
 /*********Start Experiment************/
 //Display data shows the data displayed at end of trials
