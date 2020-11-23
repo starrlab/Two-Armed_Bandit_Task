@@ -29,6 +29,18 @@ const FIXATION_KEY = '+';
 const FIXATION_SIZE = 60;
  */
 
+/* Attempting to get sound to work
+let horse = {control: "sound/horse.mp3"}
+
+let sound = {
+    type: 'audio-keyboard-response',
+    stimulus: horse,
+    choices: jsPsych.NO_KEYS,
+    trial_ends_after_audio: true
+};
+timeline.push(sound);
+*/
+
 let decide = {
     type: "html-keyboard-response",
     choices: jsPsych.NO_KEYS,
