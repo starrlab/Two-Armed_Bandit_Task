@@ -34,10 +34,10 @@ let decide = {
     choices: jsPsych.NO_KEYS,
     trial_duration: DECIDE_DURATION,
     stimulus: "<h1>Decide Which Lever to Pull!</h1>" +
-        "<div>"+
-        "<div class='centerLeft' '><img src='img/HandleLeft.png'></img>" +
+        "<div class='container'>"+
+        "<div  '><img src='img/HandleLeft.png'></img>" +
         "<p class='small'><strong>Press the ← key</strong></p></div>" +
-        "<div class='centerRight' '><img src='img/HandleRight.png'></img>" +
+        "<div  '><img src='img/HandleRight.png'></img>" +
         "<p class='small'><strong>Press the → key</strong></p></div>" +
         "</div>",
     on_finish: function (data) {
