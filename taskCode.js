@@ -1,6 +1,7 @@
 /*************Variables************/
 const VERSION = "1";
 
+const DECIDE_DURATION = 20000; //ms
 //settings
 let probability_start_left = [.8, .8, .8, .8, .2, .2, .2, .2];
 shuffleArray(probability_start_left);
@@ -27,6 +28,29 @@ const FIXATION_DURATION = [1000]; //Sets the fixation duration. Can add as many 
 const FIXATION_KEY = '+';
 const FIXATION_SIZE = 60;
  */
+
+let decide = {
+    type: "html-keyboard-response",
+    choices: jsPsych.NO_KEYS,
+    trial_duration: DECIDE_DURATION,
+    stimulus: "<h1>Decide Which Lever to Pull!</h1>" +
+        "<div>"+
+        "<div class='centerLeft' '><img src='img/HandleLeft.png'></img>" +
+        "<p class='small'><strong>Press the ← key</strong></p></div>" +
+        "<div class='centerRight' '><img src='img/HandleRight.png'></img>" +
+        "<p class='small'><strong>Press the → key</strong></p></div>" +
+        "</div>",
+    on_finish: function (data) {
+    }
+};
+//add this to timeline
+timeline.push(decide);
+
+/*********Start Experiment************/
+//Display data shows the data displayed at end of trials
+jsPsych.init({
+    timeline: timeline
+});
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {

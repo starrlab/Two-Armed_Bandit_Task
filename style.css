@@ -1,0 +1,17 @@
+.centerLeft {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.centerRight {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
