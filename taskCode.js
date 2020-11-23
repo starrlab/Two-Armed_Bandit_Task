@@ -2,18 +2,14 @@
 const VERSION = "1";
 
 //settings
-let leftBlockStartProbabilities = [.8, .8, .8, .8, .2, .2, .2, .2];
-let rightBlockStartProbabilities = [.8, .8, .8, .8, .2, .2, .2, .2];
-shuffleArray(leftBlockStartProbabilities);
-shuffleArray(rightBlockStartProbabilities);
-console.log(leftBlockStartProbabilities);
-const NUMBER_OF_BLOCKS = 8; //This will run through the entire ESSequence n number of times as specified.
-const NUMBER_OF_TRIALS = 40; //This will run through the entire ESSequence n number of times as specified.
-//const KEYBOARD_PRESS_TUTORIAL = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(13); //This is the tutorial key code
+let probability_start_left = [.8, .8, .8, .8, .2, .2, .2, .2];
+shuffleArray(probability_start_left);
+const NUMBER_OF_BLOCKS = 8;
+const NUMBER_OF_TRIALS = 40;
 const KEYBOARD_PRESS_RIGHT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(39); //This is the arrow key code
 const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); //This is the arrow key code
-let blockNumber = 1;
-let trialNumber = 1;
+let currentBlockNumber = 1;
+let currentTrialNumber = 1;
 let timeline = [];
 
 /*
