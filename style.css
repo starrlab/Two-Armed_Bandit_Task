@@ -3,3 +3,13 @@
     justify-content: space-between;
     width: 700px;
 }
+
+#checkmark_for_winner{
+    color: lawngreen;
+    font-size: 105px;
+}
+
+#x_for_loser{
+    color: red;
+    font-size: 105px;
+}
