@@ -97,8 +97,21 @@ let feedbackLoser = {
     }
 };
 
+let prepare = {
+    type: "html-keyboard-response",
+    choices: jsPsych.NO_KEYS,
+    trial_duration: DECIDE_DURATION,
+    stimulus: "<div class='container'>"+
+        "<div  '><img class='hidden_image' src='img/HandleLeft.png'></img></div>" +
+        "<div  '><h1>Prepare for the next trial!</h1></div>" +
+        "<div  '><img class='hidden_image' src='img/HandleRight.png'></img></div>" +
+        "</div>",
+    on_finish: function (data) {
+    }
+};
+
 let blockOfTrials = {
-    timeline: [decide, action, feedbackWinner, feedbackLoser],
+    timeline: [prepare, decide, action, feedbackWinner, feedbackLoser],
     randomize_order: false,
     repetitions: 2
 };

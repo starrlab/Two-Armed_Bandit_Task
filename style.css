@@ -13,3 +13,7 @@
     color: red;
     font-size: 105px;
 }
+
+.hidden_image {
+    visibility: hidden;
+}
