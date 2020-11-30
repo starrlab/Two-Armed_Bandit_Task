@@ -13,6 +13,9 @@ let currentBlockNumber = 1;
 let currentTrialNumber = 1;
 let timeline = [];
 let levers = ["leftLever", "rightLever"];
+let checkmarkForWinner = '✓';
+let xForLoser = 'X';
+let winLossCharacter = xForLoser;
 
 //let probs = [.2, .8];
 
@@ -46,8 +49,6 @@ let decide = {
     on_finish: function (data) {
     }
 };
-//add this to timeline
-timeline.push(decide);
 
 let action = {
     type: "html-keyboard-response",
@@ -58,10 +59,9 @@ let action = {
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
+
     }
 };
-//add this to timeline
-timeline.push(action);
 
 let feedbackWinner = {
     type: "html-keyboard-response",
@@ -69,14 +69,16 @@ let feedbackWinner = {
     trial_duration: DECIDE_DURATION,
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
-        "<div  '><h1 id='checkmark_for_winner'>✓</h1></div>" +
+        "<div  '><h1 id='checkmark_for_winner'>" + checkmarkForWinner + "</h1></div>" +
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
+
+    },
+    on_load: function (data) {
+       // jsPsych.finishTrial();
     }
 };
-//add this to timeline
-timeline.push(feedbackWinner);
 
 let feedbackLoser = {
     type: "html-keyboard-response",
@@ -84,30 +86,27 @@ let feedbackLoser = {
     trial_duration: DECIDE_DURATION,
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
-        "<div  '><h1 id='x_for_loser'>X</h1></div>" +
+        "<div  '><h1 id='x_for_loser'>" + xForLoser + "</h1></div>" +
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
+
+    },
+    on_load: function (data) {
+        //jsPsych.finishTrial();
     }
 };
-//add this to timeline
-timeline.push(feedbackLoser);
 
-/* Attempting to get sound to work
-let horse = {control: "sound/horse.mp3"}
-let sound = {
-    type: 'audio-keyboard-response',
-    stimulus: horse,
-    choices: jsPsych.NO_KEYS,
-    trial_ends_after_audio: true
+let blockOfTrials = {
+    timeline: [decide, action, feedbackWinner, feedbackLoser],
+    randomize_order: false,
+    repetitions: 2
 };
-timeline.push(sound);
-*/
 
 /*********Start Experiment************/
 //Display data shows the data displayed at end of trials
 jsPsych.init({
-    timeline: timeline
+    timeline: [blockOfTrials]
 });
 
 function shuffleArray(array) {
