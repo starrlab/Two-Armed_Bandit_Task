@@ -1,24 +1,22 @@
 /*************Variables************/
 const VERSION = "1";
-
+//settings
 const DECIDE_DURATION = 2000; //ms
 const PREPARE_DURATION = 1000; //ms
 const WIN_LOSE_DURATION = 1000; //ms
-//settings
-let probability_start_left = [.8, .8, .8, .8, .2, .2, .2, .2];
-shuffleArray(probability_start_left);
 const NUMBER_OF_BLOCKS = 8;
 const NUMBER_OF_TRIALS = 40;
 const KEYBOARD_PRESS_RIGHT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(39); //This is the arrow key code
 const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); //This is the arrow key code
+const CHECKMARK_WINNER = '✓';
+const X_LOSER = 'X';
 let currentBlockNumber = 1;
 let currentTrialNumber = 1;
 let timeline = [];
 let levers = ["leftLever", "rightLever"];
-let checkmarkForWinner = '✓';
-let xForLoser = 'X';
-let winLossCharacter = xForLoser;
 
+let probability_start_left = [.8, .8, .8, .8, .2, .2, .2, .2];
+shuffleArray(probability_start_left);
 //let probs = [.2, .8];
 
 
@@ -49,6 +47,7 @@ let decide = {
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
+
     }
 };
 
@@ -71,7 +70,7 @@ let feedbackWinner = {
     trial_duration: WIN_LOSE_DURATION,
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
-        "<div  '><h1 id='checkmark_for_winner'>" + checkmarkForWinner + "</h1></div>" +
+        "<div  '><h1 id='checkmark_for_winner'>" + CHECKMARK_WINNER + "</h1></div>" +
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
@@ -88,7 +87,7 @@ let feedbackLoser = {
     trial_duration: WIN_LOSE_DURATION,
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
-        "<div  '><h1 id='x_for_loser'>" + xForLoser + "</h1></div>" +
+        "<div  '><h1 id='x_for_loser'>" + X_LOSER + "</h1></div>" +
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
