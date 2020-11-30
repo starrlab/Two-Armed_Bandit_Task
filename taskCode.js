@@ -2,6 +2,8 @@
 const VERSION = "1";
 
 const DECIDE_DURATION = 2000; //ms
+const PREPARE_DURATION = 1000; //ms
+const WIN_LOSE_DURATION = 1000; //ms
 //settings
 let probability_start_left = [.8, .8, .8, .8, .2, .2, .2, .2];
 shuffleArray(probability_start_left);
@@ -66,7 +68,7 @@ let action = {
 let feedbackWinner = {
     type: "html-keyboard-response",
     choices: jsPsych.NO_KEYS,
-    trial_duration: DECIDE_DURATION,
+    trial_duration: WIN_LOSE_DURATION,
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
         "<div  '><h1 id='checkmark_for_winner'>" + checkmarkForWinner + "</h1></div>" +
@@ -83,7 +85,7 @@ let feedbackWinner = {
 let feedbackLoser = {
     type: "html-keyboard-response",
     choices: jsPsych.NO_KEYS,
-    trial_duration: DECIDE_DURATION,
+    trial_duration: WIN_LOSE_DURATION,
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
         "<div  '><h1 id='x_for_loser'>" + xForLoser + "</h1></div>" +
@@ -100,7 +102,7 @@ let feedbackLoser = {
 let prepare = {
     type: "html-keyboard-response",
     choices: jsPsych.NO_KEYS,
-    trial_duration: DECIDE_DURATION,
+    trial_duration: PREPARE_DURATION,
     stimulus: "<div class='container'>"+
         "<div  '><img class='hidden_image' src='img/HandleLeft.png'></img></div>" +
         "<div  '><h1>Prepare for the next trial!</h1></div>" +
