@@ -13,8 +13,8 @@ const X_LOSER = 'X';
 let currentBlockNumber = 1;
 let currentTrialNumber = 1;
 let timeline = [];
-let levers = ["leftLever", "rightLever"];
-let leftArrowPressed = true;
+let levers = [KEYBOARD_PRESS_LEFT, KEYBOARD_PRESS_RIGHT];
+let correctLeverChosen = true;
 
 let probability_start_left = [.8, .8, .8, .8, .2, .2, .2, .2];
 shuffleArray(probability_start_left);
@@ -43,13 +43,11 @@ let action = {
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
-        console.log(data.key_press);
-        console.log(KEYBOARD_PRESS_RIGHT);
         if(data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(KEYBOARD_PRESS_RIGHT)){
-            leftArrowPressed = false;
+            correctLeverChosen = true;
         }
         else{
-            leftArrowPressed = true;
+            correctLeverChosen = false;
         }
     }
 };
@@ -67,7 +65,7 @@ let feedbackWinner = {
 
     },
     on_load: function (data) {
-        if(leftArrowPressed){
+        if(!correctLeverChosen){
             jsPsych.finishTrial();
         }
     }
@@ -86,7 +84,7 @@ let feedbackLoser = {
 
     },
     on_load: function (data) {
-        if(!leftArrowPressed){
+        if(correctLeverChosen){
             jsPsych.finishTrial();
         }
     }
