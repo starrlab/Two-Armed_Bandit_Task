@@ -113,9 +113,9 @@ let prepare = {
 };
 
 let blockOfTrials = {
-    timeline: [prepare, decide, action, feedbackWinner, feedbackLoser],
+    timeline: [decide, action, feedbackWinner, feedbackLoser, prepare],
     randomize_order: false,
-    repetitions: 2
+    repetitions: 4
 };
 
 /*********Start Experiment************/
