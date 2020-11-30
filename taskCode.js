@@ -12,6 +12,11 @@ const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); 
 let currentBlockNumber = 1;
 let currentTrialNumber = 1;
 let timeline = [];
+let levers = ["leftLever", "rightLever"];
+
+//let probs = [.2, .8];
+
+
 
 /*
 const STIMULUS_DURATION = 2000; //This is the total time the image will be displayed before disapearing.
@@ -110,4 +115,12 @@ function shuffleArray(array) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+}
+
+function chooseWeighted(items, chances) {
+    let sum = chances.reduce((acc, el) => acc + el, 0);
+    let acc = 0;
+    chances = chances.map(el => (acc = el + acc));
+    let rand = Math.random() * sum;
+    return items[chances.filter(el => el <= rand).length];
 }
