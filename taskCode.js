@@ -161,3 +161,15 @@ function chooseWeighted(items, chances) {
     let rand = Math.random() * sum;
     return items[chances.filter(el => el <= rand).length];
 }
+
+//Algorithm found here: https://discourse.psychopy.org/t/javascript-gaussian-function/17724/2
+function generateGaussian(mean,std){
+    let _2PI = Math.PI * 2;
+    let u1 = Math.random();
+    let u2 = Math.random();
+
+    let z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(_2PI * u2);
+    let z1 = Math.sqrt(-2.0 * Math.log(u1)) * Math.sin(_2PI * u2);
+
+    return z0 * std + mean;
+}
