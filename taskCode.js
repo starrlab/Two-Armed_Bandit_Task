@@ -34,6 +34,7 @@ let decide = {
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
+        data.trial_type = "decide";
         //console.log((probability_start_left[currentBlockNumber - 1] + currentLeftProbability));
         //console.log((1 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability));
         currentCorrectLever = chooseWeighted(levers, [(probability_start_left[currentBlockNumber - 1] + currentLeftProbability), ((1 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability))])
@@ -50,6 +51,7 @@ let action = {
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
+        data.trial_type = "action";
         userResponseKeyPress = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press);
         if(userResponseKeyPress == currentCorrectLever){
             correctLeverChosen = true;
@@ -70,7 +72,7 @@ let feedbackWinner = {
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
-
+        data.trial_type = "feedbackWinner";
     },
     on_load: function (data) {
         if(!correctLeverChosen){
@@ -89,7 +91,7 @@ let feedbackLoser = {
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
-
+        data.trial_type = "feedbackLoser";
     },
     on_load: function (data) {
         if(correctLeverChosen){
@@ -108,6 +110,7 @@ let prepare = {
         "<div  '><img class='hidden_image' src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
+        data.trial_type = "prepare";
         data.current_block = currentBlockNumber;
         data.current_trial = currentTrialNumber;
         data.correct_response = currentCorrectLever;
