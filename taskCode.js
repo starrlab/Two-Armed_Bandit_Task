@@ -1,6 +1,6 @@
 /*************Variables************/
 const VERSION = "1";
-//settings
+//const
 const DECIDE_DURATION = 2000; //ms
 const PREPARE_DURATION = 1000; //ms
 const WIN_LOSE_DURATION = 1000; //ms
@@ -10,12 +10,14 @@ const KEYBOARD_PRESS_RIGHT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(39);
 const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); //This is the arrow key code
 const CHECKMARK_WINNER = '✓';
 const X_LOSER = 'X';
+//vars
 let currentBlockNumber = 1;
 let currentTrialNumber = 1;
 let timeline = [];
 let levers = [KEYBOARD_PRESS_LEFT, KEYBOARD_PRESS_RIGHT];
 let currentLeftProbability = 0;
 let currentRightProbability = 0;
+let currentCorrectLever = "";
 let correctLeverChosen = true;
 
 let probability_start_left = [.8, .8, .8, .8, .2, .2, .2, .2];
@@ -32,7 +34,10 @@ let decide = {
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
-
+        //console.log((probability_start_left[currentBlockNumber - 1] + currentLeftProbability));
+        //console.log((1 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability));
+        currentCorrectLever = chooseWeighted(levers, [(probability_start_left[currentBlockNumber - 1] + currentLeftProbability), ((1 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability))])
+        //console.log(currentCorrectLever);
     }
 };
 
@@ -45,7 +50,7 @@ let action = {
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
-        if(data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(KEYBOARD_PRESS_RIGHT)){
+        if(jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press) == currentCorrectLever){
             correctLeverChosen = true;
         }
         else{
@@ -121,12 +126,11 @@ let trialBlocks = {
     repetitions: NUMBER_OF_BLOCKS
 }
 
-/*********Start Experiment************/
-//Display data shows the data displayed at end of trials
 jsPsych.init({
     timeline: [trialBlocks],
 });
 
+/*********Helper Functions************/
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
