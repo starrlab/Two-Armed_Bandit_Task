@@ -100,6 +100,10 @@ let prepare = {
         "<div  '><img class='hidden_image' src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
+        if(currentTrialNumber == 40){
+            currentTrialNumber = 1;
+            currentBlockNumber++;
+        }
     }
 };
 
@@ -109,10 +113,16 @@ let blockOfTrials = {
     repetitions: 4
 };
 
+let trialBlocks = {
+    timeline: [blockOfTrials],
+    randomize_order: false,
+    repetitions: 8
+}
+
 /*********Start Experiment************/
 //Display data shows the data displayed at end of trials
 jsPsych.init({
-    timeline: [blockOfTrials]
+    timeline: [trialBlocks],
 });
 
 function shuffleArray(array) {
