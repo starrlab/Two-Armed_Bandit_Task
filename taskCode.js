@@ -19,10 +19,10 @@ let currentLeftProbability = 0;
 let currentRightProbability = 0;
 let currentCorrectLever = "";
 let correctLeverChosen = true;
-
+let userResponseKeyPress = "";
 let probability_start_left = [.8, .8, .8, .8, .2, .2, .2, .2];
 shuffleArray(probability_start_left);
-//let probs = [.2, .8];
+console.log(probability_start_left);
 
 let decide = {
     type: "html-keyboard-response",
@@ -50,7 +50,8 @@ let action = {
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
-        if(jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press) == currentCorrectLever){
+        userResponseKeyPress = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press);
+        if(userResponseKeyPress == currentCorrectLever){
             correctLeverChosen = true;
         }
         else{
@@ -107,10 +108,19 @@ let prepare = {
         "<div  '><img class='hidden_image' src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
+        data.current_block = currentBlockNumber;
+        data.current_trial = currentTrialNumber;
+        data.correct_response = currentCorrectLever;
+        data.user_response = userResponseKeyPress;
+        data.current_block_probability_left = (probability_start_left[currentBlockNumber - 1] + currentLeftProbability);
+        data.current_block_probability_right = ((1 - probability_start_left[currentBlockNumber - 1]) + currentRightProbability);
+        console.log("trial: " + currentTrialNumber);
+        console.log("block: " + currentBlockNumber);
         if(currentTrialNumber == NUMBER_OF_TRIALS){
-            currentTrialNumber = 1;
+            currentTrialNumber = 0;
             currentBlockNumber++;
         }
+        currentTrialNumber++;
     }
 };
 
@@ -128,6 +138,9 @@ let trialBlocks = {
 
 jsPsych.init({
     timeline: [trialBlocks],
+    on_finish: function() {
+        jsPsych.data.displayData();
+    }
 });
 
 /*********Helper Functions************/
