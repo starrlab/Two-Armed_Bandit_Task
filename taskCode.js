@@ -22,7 +22,7 @@ let correctLeverChosen = true;
 let userResponseKeyPress = "";
 let probability_start_left = [.8, .8, .8, .8, .2, .2, .2, .2];
 shuffleArray(probability_start_left);
-console.log(probability_start_left);
+//console.log(probability_start_left);
 
 let decide = {
     type: "html-keyboard-response",
@@ -117,8 +117,8 @@ let prepare = {
         data.user_response = userResponseKeyPress;
         data.current_block_probability_left = (probability_start_left[currentBlockNumber - 1] + currentLeftProbability);
         data.current_block_probability_right = ((1 - probability_start_left[currentBlockNumber - 1]) + currentRightProbability);
-        console.log("trial: " + currentTrialNumber);
-        console.log("block: " + currentBlockNumber);
+        //console.log("trial: " + currentTrialNumber);
+        //console.log("block: " + currentBlockNumber);
         if(currentTrialNumber == NUMBER_OF_TRIALS){
             currentTrialNumber = 0;
             currentBlockNumber++;
