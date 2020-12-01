@@ -5,7 +5,7 @@ const DECIDE_DURATION = 2000; //ms
 const PREPARE_DURATION = 1000; //ms
 const WIN_LOSE_DURATION = 1000; //ms
 const NUMBER_OF_BLOCKS = 8;
-const NUMBER_OF_TRIALS = 40;
+const NUMBER_OF_TRIALS = 2;
 const KEYBOARD_PRESS_RIGHT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(39); //This is the arrow key code
 const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); //This is the arrow key code
 const CHECKMARK_WINNER = '✓';
@@ -14,6 +14,8 @@ let currentBlockNumber = 1;
 let currentTrialNumber = 1;
 let timeline = [];
 let levers = [KEYBOARD_PRESS_LEFT, KEYBOARD_PRESS_RIGHT];
+let currentLeftProbability = 0;
+let currentRightProbability = 0;
 let correctLeverChosen = true;
 
 let probability_start_left = [.8, .8, .8, .8, .2, .2, .2, .2];
@@ -100,7 +102,7 @@ let prepare = {
         "<div  '><img class='hidden_image' src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
-        if(currentTrialNumber == 40){
+        if(currentTrialNumber == NUMBER_OF_TRIALS){
             currentTrialNumber = 1;
             currentBlockNumber++;
         }
@@ -110,13 +112,13 @@ let prepare = {
 let blockOfTrials = {
     timeline: [decide, action, feedbackWinner, feedbackLoser, prepare],
     randomize_order: false,
-    repetitions: 4
+    repetitions: NUMBER_OF_TRIALS
 };
 
 let trialBlocks = {
     timeline: [blockOfTrials],
     randomize_order: false,
-    repetitions: 8
+    repetitions: NUMBER_OF_BLOCKS
 }
 
 /*********Start Experiment************/
