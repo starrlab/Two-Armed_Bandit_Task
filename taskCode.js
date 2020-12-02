@@ -35,7 +35,7 @@ let decide = {
         "</div>",
     on_finish: function (data) {
         data.trial_type = "decide";
-        currentCorrectLever = chooseWeighted(levers, [(probability_start_left[currentBlockNumber - 1] + currentLeftProbability), ((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability))])
+        currentCorrectLever = weighted_random(levers, [(probability_start_left[currentBlockNumber - 1] + currentLeftProbability), ((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability))])
         console.log((probability_start_left[currentBlockNumber - 1] + currentLeftProbability));
         console.log((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability));
         console.log(currentCorrectLever);
@@ -164,12 +164,15 @@ function shuffleArray(array) {
 }
 
 //Algorithm found here: https://stackoverflow.com/questions/43566019/how-to-choose-a-weighted-random-array-element-in-javascript/55671924
-function chooseWeighted(items, chances) {
-    let sum = chances.reduce((acc, el) => acc + el, 0);
-    let acc = 0;
-    chances = chances.map(el => (acc = el + acc));
-    let rand = Math.random() * sum;
-    return items[chances.filter(el => el <= rand).length];
+function weighted_random(items, weights) {
+    let i;
+    for (i = 0; i < weights.length; i++)
+        weights[i] += weights[i - 1] || 0;
+    let random = Math.random() * weights[weights.length - 1];
+    for (i = 0; i < weights.length; i++)
+        if (weights[i] > random)
+            break;
+    return items[i];
 }
 
 //Algorithm found here: https://discourse.psychopy.org/t/javascript-gaussian-function/17724/2
