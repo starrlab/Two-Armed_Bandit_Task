@@ -155,6 +155,7 @@ jsPsych.init({
 });
 
 /*********Helper Functions************/
+//Algorithm found here: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -162,6 +163,7 @@ function shuffleArray(array) {
     }
 }
 
+//Algorithm found here: https://stackoverflow.com/questions/43566019/how-to-choose-a-weighted-random-array-element-in-javascript/55671924
 function chooseWeighted(items, chances) {
     let sum = chances.reduce((acc, el) => acc + el, 0);
     let acc = 0;
