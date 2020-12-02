@@ -35,6 +35,7 @@ let decide = {
         "</div>",
     on_finish: function (data) {
         data.trial_type = "decide";
+
         currentCorrectLever = weighted_random(levers, [(probability_start_left[currentBlockNumber - 1] + currentLeftProbability), ((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability))])
         console.log((probability_start_left[currentBlockNumber - 1] + currentLeftProbability));
         console.log((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability));
@@ -126,12 +127,18 @@ let prepare = {
         }
         currentTrialNumber++;
 
-        let std = 3;
-        do{
-            currentLeftProbability = generateGaussian(0, std);
-            currentRightProbability = generateGaussian(0, std);
-            std = 2;
-        }while ((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability) < 0 || (probability_start_left[currentBlockNumber - 1] + currentLeftProbability) < 0);
+        if(currentTrialNumber > 1){
+            let std = 3;
+            do{
+                currentLeftProbability = generateGaussian(0, std);
+                currentRightProbability = generateGaussian(0, std);
+                std = 2;
+            }while ((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability) < 0 || (probability_start_left[currentBlockNumber - 1] + currentLeftProbability) < 0);
+        }
+        else if(currentTrialNumber == 1){
+            currentLeftProbability = 0;
+            currentRightProbability = 0;
+        }
     }
 };
 
