@@ -163,13 +163,14 @@ function chooseWeighted(items, chances) {
 }
 
 //Algorithm found here: https://discourse.psychopy.org/t/javascript-gaussian-function/17724/2
+// and here: https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve
 function generateGaussian(mean,std){
-    let _2PI = Math.PI * 2;
-    let u1 = Math.random();
-    let u2 = Math.random();
+    let u1 = 0;
+    let u2 = 0;
 
-    let z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(_2PI * u2);
-    let z1 = Math.sqrt(-2.0 * Math.log(u1)) * Math.sin(_2PI * u2);
+    while(u1 === 0) u1 = Math.random();
+    while(u2 === 0) u2 = Math.random();
 
+    let z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(Math.PI * 2 * u2);
     return z0 * std + mean;
 }
