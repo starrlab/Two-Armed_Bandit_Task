@@ -5,7 +5,7 @@ const DECIDE_DURATION = 2000; //ms
 const PREPARE_DURATION = 1000; //ms
 const WIN_LOSE_DURATION = 1000; //ms
 const NUMBER_OF_BLOCKS = 8;
-const NUMBER_OF_TRIALS = 2;
+const NUMBER_OF_TRIALS = 4;
 const KEYBOARD_PRESS_RIGHT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(39); //This is the arrow key code
 const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); //This is the arrow key code
 const CHECKMARK_WINNER = '✓';
@@ -20,7 +20,7 @@ let currentRightProbability = 0;
 let currentCorrectLever = "";
 let correctLeverChosen = true;
 let userResponseKeyPress = "";
-let probability_start_left = [.8, .8, .8, .8, .2, .2, .2, .2];
+let probability_start_left = [80, 80, 80, 80, 20, 20, 20, 20];
 shuffleArray(probability_start_left);
 //console.log(probability_start_left);
 
@@ -35,10 +35,10 @@ let decide = {
         "</div>",
     on_finish: function (data) {
         data.trial_type = "decide";
-        //console.log((probability_start_left[currentBlockNumber - 1] + currentLeftProbability));
-        //console.log((1 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability));
-        currentCorrectLever = chooseWeighted(levers, [(probability_start_left[currentBlockNumber - 1] + currentLeftProbability), ((1 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability))])
-        //console.log(currentCorrectLever);
+        currentCorrectLever = chooseWeighted(levers, [(probability_start_left[currentBlockNumber - 1] + currentLeftProbability), ((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability))])
+        console.log((probability_start_left[currentBlockNumber - 1] + currentLeftProbability));
+        console.log((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability));
+        console.log(currentCorrectLever);
     }
 };
 
@@ -119,11 +119,19 @@ let prepare = {
         data.current_block_probability_right = ((1 - probability_start_left[currentBlockNumber - 1]) + currentRightProbability);
         //console.log("trial: " + currentTrialNumber);
         //console.log("block: " + currentBlockNumber);
+
         if(currentTrialNumber == NUMBER_OF_TRIALS){
             currentTrialNumber = 0;
             currentBlockNumber++;
         }
         currentTrialNumber++;
+
+        let std = 3;
+        do{
+            currentLeftProbability = generateGaussian(0, std);
+            currentRightProbability = generateGaussian(0, std);
+            std = 2;
+        }while ((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability) < 0 || (probability_start_left[currentBlockNumber - 1] + currentLeftProbability) < 0);
     }
 };
 
