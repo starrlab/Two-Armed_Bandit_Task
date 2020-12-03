@@ -116,8 +116,8 @@ let prepare = {
         data.current_trial = currentTrialNumber;
         data.correct_response = currentCorrectLever;
         data.user_response = userResponseKeyPress;
-        data.current_block_probability_left = 100/(probability_start_left[currentBlockNumber - 1] + currentLeftProbability);
-        data.current_block_probability_right = 100/((100 - probability_start_left[currentBlockNumber - 1]) + currentRightProbability);
+        data.current_block_probability_left = (probability_start_left[currentBlockNumber - 1] + currentLeftProbability)/100;
+        data.current_block_probability_right = ((100 - probability_start_left[currentBlockNumber - 1]) + currentRightProbability)/100;
         //console.log("trial: " + currentTrialNumber);
         //console.log("block: " + currentBlockNumber);
 
