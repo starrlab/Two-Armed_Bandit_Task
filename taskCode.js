@@ -22,9 +22,21 @@ let correctLeverChosen = true;
 let userResponseKeyPress = "";
 let probability_start_left = [80, 80, 80, 80, 20, 20, 20, 20];
 shuffleArray(probability_start_left);
-//console.log(probability_start_left);
+let csvData = "";
 
-let decide = {
+csvData = "version," + VERSION + "\n";
+csvData += "DECIDE_DURATION," + DECIDE_DURATION + "\n";
+csvData += "PREPARE_DURATION," + PREPARE_DURATION + "\n";
+csvData += "WIN_LOSE_DURATION," + WIN_LOSE_DURATION + "\n";
+csvData += "NUMBER_OF_BLOCKS," + NUMBER_OF_BLOCKS + "\n";
+csvData += "NUMBER_OF_TRIALS," + NUMBER_OF_TRIALS + "\n";
+csvData += "KEYBOARD_PRESS_RIGHT," + KEYBOARD_PRESS_RIGHT + "\n";
+csvData += "KEYBOARD_PRESS_LEFT," + KEYBOARD_PRESS_LEFT + "\n";
+csvData += "probability_order_left," + probability_start_left + "\n";
+csvData += "Linux Time (on finish), Trial Index, Total Time Elapsed, Test Part, Block, Trial, RT Time, Probability, User Response, Correct Response, Reward\n"
+
+
+    let decide = {
     type: "html-keyboard-response",
     choices: jsPsych.NO_KEYS,
     trial_duration: DECIDE_DURATION,
