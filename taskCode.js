@@ -22,8 +22,9 @@ let correctLeverChosen = true;
 let userResponseKeyPress = "";
 let probability_start_left = [80, 80, 80, 80, 20, 20, 20, 20];
 shuffleArray(probability_start_left);
+let RTtime = 0;
 let csvData = "";
-
+//metadata
 csvData = "version," + VERSION + "\n";
 csvData += "DECIDE_DURATION," + DECIDE_DURATION + "\n";
 csvData += "PREPARE_DURATION," + PREPARE_DURATION + "\n";
@@ -32,8 +33,9 @@ csvData += "NUMBER_OF_BLOCKS," + NUMBER_OF_BLOCKS + "\n";
 csvData += "NUMBER_OF_TRIALS," + NUMBER_OF_TRIALS + "\n";
 csvData += "KEYBOARD_PRESS_RIGHT," + KEYBOARD_PRESS_RIGHT + "\n";
 csvData += "KEYBOARD_PRESS_LEFT," + KEYBOARD_PRESS_LEFT + "\n";
-csvData += "probability_order_left," + probability_start_left + "\n";
-csvData += "Linux Time (on finish), Trial Index, Total Time Elapsed, Test Part, Block, Trial, RT Time, Probability, User Response, Correct Response, Reward\n"
+csvData += "probability_ordering_left," + probability_start_left + "\n";
+//title
+csvData += "Linux Time (on finish), Task Index, Total Time Elapsed, Test Type, Block, Trial, Action RT Time, Probability_Left, Probability_Right, User Response, Correct Response, Reward\n"
 
 
     let decide = {
@@ -66,6 +68,7 @@ let action = {
     on_finish: function (data) {
         data.trial_type = "action";
         userResponseKeyPress = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(data.key_press);
+        RTtime = data.rt;
         if(userResponseKeyPress == currentCorrectLever){
             correctLeverChosen = true;
         }
@@ -130,8 +133,10 @@ let prepare = {
         data.user_response = userResponseKeyPress;
         data.current_block_probability_left = (probability_start_left[currentBlockNumber - 1] + currentLeftProbability)/100;
         data.current_block_probability_right = ((100 - probability_start_left[currentBlockNumber - 1]) + currentRightProbability)/100;
-        //console.log("trial: " + currentTrialNumber);
-        //console.log("block: " + currentBlockNumber);
+        data.correct = jsPsych.pluginAPI.convertKeyCharacterToKeyCode(currentCorrectLever) == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(userResponseKeyPress)
+
+        csvData += Date.now().toString() + "," + data.trial_index + "," +  data.time_elapsed + "," + "prepare," + currentBlockNumber + "," + currentTrialNumber + "," +  RTtime + "," + data.current_block_probability_left + "," + data.current_block_probability_right + "," + userResponseKeyPress + "," + currentCorrectLever + "," + data.correct + "\n";
+        console.log(csvData);
 
         if(currentTrialNumber == NUMBER_OF_TRIALS){
             currentTrialNumber = 0;
