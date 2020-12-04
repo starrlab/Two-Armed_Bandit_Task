@@ -54,7 +54,7 @@ csvData += "Linux Time (on finish), Task Index, Total Time Elapsed, Test Type, B
         console.log((probability_start_left[currentBlockNumber - 1] + currentLeftProbability));
         console.log((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability));
         console.log(currentCorrectLever);
-        csvData += Date.now().toString() + "," + data.trial_index + "," +  data.time_elapsed + "," + "decide," + currentBlockNumber + "," + currentTrialNumber + "," +  "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "\n";
+        csvData += Date.now().toString() + "," + (data.trial_index+1) + "," +  data.time_elapsed + "," + "decide," + currentBlockNumber + "," + currentTrialNumber + "," +  "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "\n";
 
     }
 };
@@ -77,7 +77,7 @@ let action = {
         else{
             correctLeverChosen = false;
         }
-        csvData += Date.now().toString() + "," + data.trial_index + "," +  data.time_elapsed + "," + "action," + currentBlockNumber + "," + currentTrialNumber + "," +  RTtime + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "\n";
+        csvData += Date.now().toString() + "," + (data.trial_index+1) + "," +  data.time_elapsed + "," + "action," + currentBlockNumber + "," + currentTrialNumber + "," +  RTtime + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "\n";
 
     }
 };
@@ -93,7 +93,7 @@ let feedbackWinner = {
         "</div>",
     on_finish: function (data) {
         data.trial_type = "feedbackWinner";
-        csvData += Date.now().toString() + "," + data.trial_index + "," +  data.time_elapsed + "," + "feedback_win," + currentBlockNumber + "," + currentTrialNumber + "," +  "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "\n";
+        csvData += Date.now().toString() + "," + (data.trial_index+1) + "," +  data.time_elapsed + "," + "feedback_win," + currentBlockNumber + "," + currentTrialNumber + "," +  "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "\n";
 
     },
     on_load: function (data) {
@@ -114,7 +114,7 @@ let feedbackLoser = {
         "</div>",
     on_finish: function (data) {
         data.trial_type = "feedbackLoss";
-        csvData += Date.now().toString() + "," + data.trial_index + "," +  data.time_elapsed + "," + "feedback_loss," + currentBlockNumber + "," + currentTrialNumber + "," +  "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "\n";
+        csvData += Date.now().toString() + "," + (data.trial_index+1) + "," +  data.time_elapsed + "," + "feedback_loss," + currentBlockNumber + "," + currentTrialNumber + "," +  "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "\n";
 
     },
     on_load: function (data) {
@@ -143,7 +143,7 @@ let prepare = {
         data.current_block_probability_right = ((100 - probability_start_left[currentBlockNumber - 1]) + currentRightProbability)/100;
         data.correct = jsPsych.pluginAPI.convertKeyCharacterToKeyCode(currentCorrectLever) == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(userResponseKeyPress)
 
-        csvData += Date.now().toString() + "," + data.trial_index + "," +  data.time_elapsed + "," + "prepare," + currentBlockNumber + "," + currentTrialNumber + "," +  RTtime + "," + data.current_block_probability_left + "," + data.current_block_probability_right + "," + userResponseKeyPress + "," + currentCorrectLever + "," + data.correct + "\n";
+        csvData += Date.now().toString() + "," + (data.trial_index+1) + "," +  data.time_elapsed + "," + "prepare," + currentBlockNumber + "," + currentTrialNumber + "," +  RTtime + "," + data.current_block_probability_left + "," + data.current_block_probability_right + "," + userResponseKeyPress + "," + currentCorrectLever + "," + data.correct + "\n";
         console.log(csvData);
 
         if(currentTrialNumber == NUMBER_OF_TRIALS){
