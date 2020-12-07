@@ -44,7 +44,7 @@ csvData += "Linux Time (on finish), Task Index, Total Time Elapsed, Test Type, B
     choices: jsPsych.NO_KEYS,
     trial_duration: DECIDE_DURATION,
         prompt: function() {
-            return "<div><h1>" + rewardCount + "</h1></div>"
+            return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
         },
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
@@ -67,7 +67,7 @@ let action = {
     type: "html-keyboard-response",
     choices: [KEYBOARD_PRESS_RIGHT, KEYBOARD_PRESS_LEFT],
     prompt: function() {
-        return "<div><h1>" + rewardCount + "</h1></div>"
+        return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
@@ -95,7 +95,7 @@ let feedbackWinner = {
     choices: jsPsych.NO_KEYS,
     trial_duration: WIN_LOSE_DURATION,
     prompt: function() {
-        return "<div><h1>" + rewardCount + "</h1></div>"
+        return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
@@ -119,7 +119,7 @@ let feedbackLoser = {
     choices: jsPsych.NO_KEYS,
     trial_duration: WIN_LOSE_DURATION,
     prompt: function() {
-        return "<div><h1>" + rewardCount + "</h1></div>"
+        return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
@@ -143,7 +143,7 @@ let prepare = {
     choices: jsPsych.NO_KEYS,
     trial_duration: PREPARE_DURATION,
     prompt: function() {
-        return "<div><h1>" + rewardCount + "</h1></div>"
+        return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
         "<div  '><img class='hidden_image' src='img/HandleLeft.png'></img></div>" +
