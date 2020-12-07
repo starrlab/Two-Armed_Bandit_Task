@@ -205,6 +205,37 @@ jsPsych.init({
     }
 });
 
+//Close task early and save data
+keys = [];
+document.onkeydown = function (e) {
+    if (e.key === 'q') {
+        keys.push(e.key);
+    }
+    if (e.key === 'w') {
+        keys.push(e.key);
+    }
+    if (e.key === 'e') {
+        keys.push(e.key);
+    }
+
+    if (keys.includes('q') && keys.includes('w') && keys.includes('e')) {
+        jsPsych.pauseExperiment();
+        keys.length = 0;
+        let exitTask = confirm("Task Paused. Click Ok to save data and quit or Cancel to resume Task.");
+        if (exitTask) {
+            let filename = "task_" + Date.now().toString() + "_ver" + VERSION + ".csv";
+            saveData(csvData, filename);
+            let confirmClose = confirm("Saving Task Data to File. Close window?");
+            if (confirmClose) {
+                window.close();
+            }
+        }
+        else{
+            jsPsych.resumeExperiment();
+        }
+    }
+}
+
 /*********Helper Functions************/
 //Algorithm found here: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 function shuffleArray(array) {
