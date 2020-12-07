@@ -22,6 +22,7 @@ let correctLeverChosen = true;
 let userResponseKeyPress = "";
 let probability_start_left = [80, 80, 80, 80, 20, 20, 20, 20];
 shuffleArray(probability_start_left);
+let rewardCount = 0;
 let RTtime = 0;
 let csvData = "";
 //metadata
@@ -42,6 +43,9 @@ csvData += "Linux Time (on finish), Task Index, Total Time Elapsed, Test Type, B
     type: "html-keyboard-response",
     choices: jsPsych.NO_KEYS,
     trial_duration: DECIDE_DURATION,
+        prompt: function() {
+            return "<div><h1>" + rewardCount + "</h1></div>"
+        },
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
         "<div  '><h1>Decide Lever to Pull!</h1></div>" +
@@ -62,6 +66,9 @@ csvData += "Linux Time (on finish), Task Index, Total Time Elapsed, Test Type, B
 let action = {
     type: "html-keyboard-response",
     choices: [KEYBOARD_PRESS_RIGHT, KEYBOARD_PRESS_LEFT],
+    prompt: function() {
+        return "<div><h1>" + rewardCount + "</h1></div>"
+    },
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
         "<div  '><h1>Pull a Lever!</h1></div>" +
@@ -73,6 +80,7 @@ let action = {
         RTtime = data.rt;
         if(userResponseKeyPress == currentCorrectLever){
             correctLeverChosen = true;
+            rewardCount++;
         }
         else{
             correctLeverChosen = false;
@@ -86,6 +94,9 @@ let feedbackWinner = {
     type: "html-keyboard-response",
     choices: jsPsych.NO_KEYS,
     trial_duration: WIN_LOSE_DURATION,
+    prompt: function() {
+        return "<div><h1>" + rewardCount + "</h1></div>"
+    },
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
         "<div  '><h1 id='checkmark_for_winner'>" + CHECKMARK_WINNER + "</h1></div>" +
@@ -107,6 +118,9 @@ let feedbackLoser = {
     type: "html-keyboard-response",
     choices: jsPsych.NO_KEYS,
     trial_duration: WIN_LOSE_DURATION,
+    prompt: function() {
+        return "<div><h1>" + rewardCount + "</h1></div>"
+    },
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
         "<div  '><h1 id='x_for_loser'>" + X_LOSER + "</h1></div>" +
@@ -128,6 +142,9 @@ let prepare = {
     type: "html-keyboard-response",
     choices: jsPsych.NO_KEYS,
     trial_duration: PREPARE_DURATION,
+    prompt: function() {
+        return "<div><h1>" + rewardCount + "</h1></div>"
+    },
     stimulus: "<div class='container'>"+
         "<div  '><img class='hidden_image' src='img/HandleLeft.png'></img></div>" +
         "<div  '><h1>Prepare for the next trial!</h1></div>" +
