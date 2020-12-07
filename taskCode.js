@@ -10,6 +10,9 @@ const KEYBOARD_PRESS_RIGHT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(39);
 const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); //This is the arrow key code
 const CHECKMARK_WINNER = '✓';
 const X_LOSER = 'X';
+const KEYCOMBOCHAR1 = 'q';
+const KEYCOMBOCHAR2 = 'w';
+const KEYCOMBOCHAR3 = 'e';
 //vars
 let currentBlockNumber = 1;
 let currentTrialNumber = 1;
@@ -208,20 +211,20 @@ jsPsych.init({
 //Close task early and save data
 keys = [];
 document.onkeydown = function (e) {
-    if (e.key === 'q') {
+    if (e.key === KEYCOMBOCHAR1) {
         keys.push(e.key);
     }
-    if (e.key === 'w') {
+    if (e.key === KEYCOMBOCHAR2) {
         keys.push(e.key);
     }
-    if (e.key === 'e') {
+    if (e.key === KEYCOMBOCHAR3) {
         keys.push(e.key);
     }
 
-    if (keys.includes('q') && keys.includes('w') && keys.includes('e')) {
+    if (keys.includes(KEYCOMBOCHAR1) && keys.includes(KEYCOMBOCHAR2) && keys.includes(KEYCOMBOCHAR3)) {
         jsPsych.pauseExperiment();
         keys.length = 0;
-        let exitTask = confirm("Task Paused. Click Ok to save data and quit or Cancel to resume Task.");
+        let exitTask = confirm("Task Paused...\nClick OK to save data and quit OR Cancel to resume Task.");
         if (exitTask) {
             let filename = "task_" + Date.now().toString() + "_ver" + VERSION + ".csv";
             saveData(csvData, filename);
