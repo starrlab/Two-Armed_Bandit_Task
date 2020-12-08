@@ -202,7 +202,7 @@ let trialBlocks = {
 jsPsych.init({
     timeline: [trialBlocks],
     on_finish: function() {
-        jsPsych.data.displayData();
+        //jsPsych.data.displayData();
         let filename = "task_" + Date.now().toString() + "_ver" + VERSION + ".csv";
         saveData(csvData, filename);
     }
