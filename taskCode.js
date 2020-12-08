@@ -51,7 +51,7 @@ let decide = {
         },
     stimulus: "<div class='container'>"+
         "<div  '><img src='img/HandleLeft.png'></img></div>" +
-        "<div  '><h1>Decide Lever to Pull!</h1></div>" +
+        "<div  '><h1>Decide a Lever to Pull!</h1></div>" +
         "<div  '><img src='img/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {

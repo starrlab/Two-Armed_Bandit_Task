@@ -1,7 +1,7 @@
 .container {
     display: flex;
     justify-content: space-between;
-    width: 700px;
+    width: 900px;
 }
 
 #checkmark_for_winner{
