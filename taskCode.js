@@ -5,7 +5,7 @@ const DECIDE_DURATION = 2000; //ms
 const PREPARE_DURATION = 1000; //ms
 const WIN_LOSE_DURATION = 1000; //ms
 const NUMBER_OF_BLOCKS = 8;
-const NUMBER_OF_TRIALS = 4;
+const NUMBER_OF_TRIALS = 40;
 const KEYBOARD_PRESS_RIGHT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(39); //This is the arrow key code
 const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); //This is the arrow key code
 const CHECKMARK_WINNER = '✓';
@@ -42,7 +42,7 @@ csvData += "probability_ordering_left," + probability_start_left + "\n";
 csvData += "Linux Time (on finish), Task Index, Total Time Elapsed, Test Type, Block, Trial, Action RT Time, Probability_Left, Probability_Right, User Response, Correct Response, Reward\n"
 
 
-    let decide = {
+let decide = {
     type: "html-keyboard-response",
     choices: jsPsych.NO_KEYS,
     trial_duration: DECIDE_DURATION,
@@ -56,13 +56,8 @@ csvData += "Linux Time (on finish), Task Index, Total Time Elapsed, Test Type, B
         "</div>",
     on_finish: function (data) {
         data.trial_type = "decide";
-
         currentCorrectLever = weighted_random(levers, [(probability_start_left[currentBlockNumber - 1] + currentLeftProbability), ((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability))])
-        console.log((probability_start_left[currentBlockNumber - 1] + currentLeftProbability));
-        console.log((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability));
-        console.log(currentCorrectLever);
         csvData += Date.now().toString() + "," + (data.trial_index+1) + "," +  data.time_elapsed + "," + "decide," + currentBlockNumber + "," + currentTrialNumber + "," +  "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "\n";
-
     }
 };
 
@@ -89,7 +84,6 @@ let action = {
             correctLeverChosen = false;
         }
         csvData += Date.now().toString() + "," + (data.trial_index+1) + "," +  data.time_elapsed + "," + "action," + currentBlockNumber + "," + currentTrialNumber + "," +  RTtime + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "\n";
-
     }
 };
 
@@ -108,7 +102,6 @@ let feedbackWinner = {
     on_finish: function (data) {
         data.trial_type = "feedbackWinner";
         csvData += Date.now().toString() + "," + (data.trial_index+1) + "," +  data.time_elapsed + "," + "feedback_win," + currentBlockNumber + "," + currentTrialNumber + "," +  "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "\n";
-
     },
     on_load: function (data) {
         if(!correctLeverChosen){
@@ -132,7 +125,6 @@ let feedbackLoser = {
     on_finish: function (data) {
         data.trial_type = "feedbackLoss";
         csvData += Date.now().toString() + "," + (data.trial_index+1) + "," +  data.time_elapsed + "," + "feedback_loss," + currentBlockNumber + "," + currentTrialNumber + "," +  "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "," + "n/a" + "\n";
-
     },
     on_load: function (data) {
         if(correctLeverChosen){
@@ -164,14 +156,14 @@ let prepare = {
         data.correct = jsPsych.pluginAPI.convertKeyCharacterToKeyCode(currentCorrectLever) == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(userResponseKeyPress)
 
         csvData += Date.now().toString() + "," + (data.trial_index+1) + "," +  data.time_elapsed + "," + "prepare," + currentBlockNumber + "," + currentTrialNumber + "," +  RTtime + "," + data.current_block_probability_left + "," + data.current_block_probability_right + "," + userResponseKeyPress + "," + currentCorrectLever + "," + data.correct + "\n";
-        console.log(csvData);
-
+        //Check if block is finished, if so reset trials and increment blocks. Right after increment trial so we start at 1
         if(currentTrialNumber == NUMBER_OF_TRIALS){
             currentTrialNumber = 0;
             currentBlockNumber++;
         }
         currentTrialNumber++;
 
+        //This sets the probabilities to be added onto the initial probability set. We want it to be 0 if its the first trial
         if(currentTrialNumber > 1){
             let std = 3;
             do{
@@ -208,7 +200,7 @@ jsPsych.init({
     }
 });
 
-//Close task early and save data
+/*************Key Combo for pausing, ending task early and saving data************/
 keys = [];
 document.onkeydown = function (e) {
     if (e.key === KEYCOMBOCHAR1) {
