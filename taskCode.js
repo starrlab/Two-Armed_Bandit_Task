@@ -10,9 +10,7 @@ const KEYBOARD_PRESS_RIGHT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(39);
 const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); //This is the arrow key code
 const CHECKMARK_WINNER = '✓';
 const X_LOSER = 'X';
-const KEYCOMBOCHAR1 = 'q';
-const KEYCOMBOCHAR2 = 'w';
-const KEYCOMBOCHAR3 = 'e';
+
 //vars
 let currentBlockNumber = 1;
 let currentTrialNumber = 1;
@@ -200,36 +198,7 @@ jsPsych.init({
     }
 });
 
-/*************Key Combo for pausing, ending task early and saving data************/
-keys = [];
-document.onkeydown = function (e) {
-    if (e.key === KEYCOMBOCHAR1) {
-        keys.push(e.key);
-    }
-    if (e.key === KEYCOMBOCHAR2) {
-        keys.push(e.key);
-    }
-    if (e.key === KEYCOMBOCHAR3) {
-        keys.push(e.key);
-    }
 
-    if (keys.includes(KEYCOMBOCHAR1) && keys.includes(KEYCOMBOCHAR2) && keys.includes(KEYCOMBOCHAR3)) {
-        jsPsych.pauseExperiment();
-        keys.length = 0;
-        let exitTask = confirm("Task Paused...\nClick OK to save data and quit OR Cancel to resume Task.");
-        if (exitTask) {
-            let filename = "task_" + Date.now().toString() + "_ver" + VERSION + ".csv";
-            saveData(csvData, filename);
-            let confirmClose = confirm("Saving Task Data to File. Close window?");
-            if (confirmClose) {
-                window.close();
-            }
-        }
-        else{
-            jsPsych.resumeExperiment();
-        }
-    }
-}
 
 /*********Helper Functions************/
 //Algorithm found here: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
