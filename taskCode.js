@@ -10,6 +10,7 @@ const KEYBOARD_PRESS_RIGHT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(39);
 const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); //This is the arrow key code
 const CHECKMARK_WINNER = '✓';
 const X_LOSER = 'X';
+const MEAN = 0;
 const STD_DEV = 3;
 
 //vars
@@ -167,12 +168,12 @@ let prepare = {
         if(currentTrialNumber > 1){
             let count = 2;
             do{
-                currentLeftProbability = generateGaussian(0, STD_DEV);
-                currentRightProbability = generateGaussian(0, STD_DEV);
+                currentLeftProbability = generateGaussian(MEAN, STD_DEV);
+                currentRightProbability = generateGaussian(MEAN, STD_DEV);
                 count --;
                 if(count < 1){
-                    currentLeftProbability = generateGaussian(0, (STD_DEV-1));
-                    currentRightProbability = generateGaussian(0, (STD_DEV-1));
+                    currentLeftProbability = generateGaussian(MEAN, (STD_DEV-1));
+                    currentRightProbability = generateGaussian(MEAN, (STD_DEV-1));
                 }
             }while ((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability) < 0 || (probability_start_left[currentBlockNumber - 1] + currentLeftProbability) < 0);
         }
