@@ -10,6 +10,7 @@ const KEYBOARD_PRESS_RIGHT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(39);
 const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); //This is the arrow key code
 const CHECKMARK_WINNER = '✓';
 const X_LOSER = 'X';
+const STD_DEV = 3;
 
 //vars
 let currentBlockNumber = 1;
@@ -162,12 +163,17 @@ let prepare = {
         currentTrialNumber++;
 
         //This sets the probabilities to be added onto the initial probability set. We want it to be 0 if its the first trial
+        //Try twice with current std dev and if it fails decrement and keep trying
         if(currentTrialNumber > 1){
-            let std = 3;
+            let count = 2;
             do{
-                currentLeftProbability = generateGaussian(0, std);
-                currentRightProbability = generateGaussian(0, std);
-                std = 2;
+                currentLeftProbability = generateGaussian(0, STD_DEV);
+                currentRightProbability = generateGaussian(0, STD_DEV);
+                count --;
+                if(count < 1){
+                    currentLeftProbability = generateGaussian(0, (STD_DEV-1));
+                    currentRightProbability = generateGaussian(0, (STD_DEV-1));
+                }
             }while ((100 - (probability_start_left[currentBlockNumber - 1]) + currentRightProbability) < 0 || (probability_start_left[currentBlockNumber - 1] + currentLeftProbability) < 0);
         }
         else if(currentTrialNumber == 1){
