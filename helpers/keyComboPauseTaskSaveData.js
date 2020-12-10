@@ -21,9 +21,9 @@ document.onkeydown = function (e) {
         if (exitTask) {
             let filename = "task_" + Date.now().toString() + "_ver" + VERSION + ".csv";
             saveData(csvData, filename);
-            let confirmClose = confirm("Saving Task Data to File. Close window?");
-            if (confirmClose) {
-                window.close();
+            let resume = confirm("Resume Experiment?");
+            if (resume) {
+                jsPsych.resumeExperiment();
             }
         }
         else{
