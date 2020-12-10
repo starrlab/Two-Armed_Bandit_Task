@@ -2,8 +2,8 @@ const NUMBER_OF_TRIALS = 20;
 const DECIDE_DURATION = 2000; //ms
 const PREPARE_DURATION = 1000; //ms
 const WIN_LOSE_DURATION = 1000; //ms
-const INSTRUCTIONS = "instructions go here. Press any key to continue";
-const PRACTICE_COMPLETE = "Practice Complete! Press any key to go back";
+const INSTRUCTIONS = "Instructions go here";
+const PRACTICE_COMPLETE = "Practice Complete!";
 const KEYBOARD_PRESS_RIGHT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(39); //This is the arrow key code
 const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); //This is the arrow key code
 const CHECKMARK_WINNER = '✓';
@@ -21,13 +21,9 @@ shuffleArray(probability_start_left);
 let instructions = {
     type: "html-keyboard-response",
     choices: jsPsych.ALL_KEYS,
-    stimulus: "<div class='container'>"+
-        "<div  '><img src='img/HandleLeft.png'></img>" +
-        "<p class='small'><strong>Press the ← key</strong></p></div>" +
-        "<div  '><h1>" + INSTRUCTIONS + "</h1></div>" +
-        "<div  '><img src='img/HandleRight.png'></img>" +
-        "<p class='small'><strong>Press the → key</strong></p></div>" +
-        "</div>"
+    stimulus: "<div >"+
+        "<div  '><h1>" + INSTRUCTIONS + "</h1> <h3>Press any key to continue</h3></div>" +
+        "</div>",
 }
 
 let decide = {
@@ -157,8 +153,8 @@ let prepare = {
 let practiceComplete = {
     type: "html-keyboard-response",
     choices: jsPsych.ALL_KEYS,
-    stimulus: "<div class='container'>"+
-        "<div  '><h1>" + PRACTICE_COMPLETE + "</h1></div>" +
+    stimulus: "<div>"+
+        "<div  '><h1>" + PRACTICE_COMPLETE + "</h1><h3>Press any key to go back</h3></div>" +
         "</div>",
     on_finish: function () {
         window.history.back();
