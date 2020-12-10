@@ -50,9 +50,9 @@ let decide = {
             return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
         },
     stimulus: "<div class='container'>"+
-        "<div  '><img src='img/HandleLeft.png'></img></div>" +
+        "<div  '><img src='../images/HandleLeft.png'></img></div>" +
         "<div  '><h1>Decide a Lever to Pull!</h1></div>" +
-        "<div  '><img src='img/HandleRight.png'></img></div>" +
+        "<div  '><img src='../images/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
         data.trial_type = "decide";
@@ -68,9 +68,9 @@ let action = {
         return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
-        "<div  '><img src='img/HandleLeft.png'></img></div>" +
+        "<div  '><img src='../images/HandleLeft.png'></img></div>" +
         "<div  '><h1>Pull a Lever!</h1></div>" +
-        "<div  '><img src='img/HandleRight.png'></img></div>" +
+        "<div  '><img src='../images/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
         data.trial_type = "action";
@@ -95,9 +95,9 @@ let feedbackWinner = {
         return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
-        "<div  '><img src='img/HandleLeft.png'></img></div>" +
+        "<div  '><img src='../images/HandleLeft.png'></img></div>" +
         "<div  '><h1 id='checkmark_for_winner'>" + CHECKMARK_WINNER + "</h1></div>" +
-        "<div  '><img src='img/HandleRight.png'></img></div>" +
+        "<div  '><img src='../images/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
         data.trial_type = "feedbackWinner";
@@ -118,9 +118,9 @@ let feedbackLoser = {
         return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
-        "<div  '><img src='img/HandleLeft.png'></img></div>" +
+        "<div  '><img src='../images/HandleLeft.png'></img></div>" +
         "<div  '><h1 id='x_for_loser'>" + X_LOSER + "</h1></div>" +
-        "<div  '><img src='img/HandleRight.png'></img></div>" +
+        "<div  '><img src='../images/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
         data.trial_type = "feedbackLoss";
@@ -141,9 +141,9 @@ let prepare = {
         return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
-        "<div  '><img class='hidden_image' src='img/HandleLeft.png'></img></div>" +
+        "<div  '><img class='hidden_image' src='../images/HandleLeft.png'></img></div>" +
         "<div  '><h1>Prepare for the next trial!</h1></div>" +
-        "<div  '><img class='hidden_image' src='img/HandleRight.png'></img></div>" +
+        "<div  '><img class='hidden_image' src='../images/HandleRight.png'></img></div>" +
         "</div>",
     on_finish: function (data) {
         data.trial_type = "prepare";

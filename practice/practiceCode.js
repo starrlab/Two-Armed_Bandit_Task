@@ -34,10 +34,10 @@ let decide = {
         return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
-        "<div  '><img src='img/HandleLeft.png'></img>" +
+        "<div  '><img src='../images/HandleLeft.png'></img>" +
         "<p class='small'><strong>Press the ← key</strong></p></div>" +
         "<div  '><h1>Decide a Lever to Pull!</h1></div>" +
-        "<div  '><img src='img/HandleRight.png'></img>" +
+        "<div  '><img src='../images/HandleRight.png'></img>" +
         "<p class='small'><strong>Press the → key</strong></p></div>" +
         "</div>",
     on_finish: function (data) {
@@ -54,10 +54,10 @@ let action = {
         return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
-        "<div  '><img src='img/HandleLeft.png'></img>" +
+        "<div  '><img src='../images/HandleLeft.png'></img>" +
         "<p class='small'><strong>Press the ← key</strong></p></div>" +
         "<div  '><h1>Pull a Lever!</h1></div>" +
-        "<div  '><img src='img/HandleRight.png'></img>" +
+        "<div  '><img src='../images/HandleRight.png'></img>" +
         "<p class='small'><strong>Press the → key</strong></p></div>" +
         "</div>",
     on_finish: function (data) {
@@ -82,10 +82,10 @@ let feedbackWinner = {
         return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
-        "<div  '><img src='img/HandleLeft.png'></img>" +
+        "<div  '><img src='../images/HandleLeft.png'></img>" +
         "<p class='small'><strong>Press the ← key</strong></p></div>" +
         "<div  '><h1 id='checkmark_for_winner'>" + CHECKMARK_WINNER + "</h1></div>" +
-        "<div  '><img src='img/HandleRight.png'></img>" +
+        "<div  '><img src='../images/HandleRight.png'></img>" +
         "<p class='small'><strong>Press the → key</strong></p></div>" +
         "</div>",
     on_finish: function (data) {
@@ -107,10 +107,10 @@ let feedbackLoser = {
         return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
-        "<div  '><img src='img/HandleLeft.png'></img>" +
+        "<div  '><img src='../images/HandleLeft.png'></img>" +
         "<p class='small'><strong>Press the ← key</strong></p></div>" +
         "<div  '><h1 id='x_for_loser'>" + X_LOSER + "</h1></div>" +
-        "<div  '><img src='img/HandleRight.png'></img>" +
+        "<div  '><img src='../images/HandleRight.png'></img>" +
         "<p class='small'><strong>Press the → key</strong></p></div>" +
         "</div>",
     on_finish: function (data) {
@@ -130,15 +130,13 @@ let prepare = {
         return "<div><h1>$" + String(rewardCount.toString()).padStart(2, '0') + ".00</h1></div>"
     },
     stimulus: "<div class='container'>"+
-        "<div  '><img src='img/HandleLeft.png'></img>" +
+        "<div  '><img src='../images/HandleLeft.png'></img>" +
         "<p class='small'><strong>Press the ← key</strong></p></div>" +
         "<div  '><h1>Prepare for the next trial!</h1></div>" +
-        "<div  '><img src='img/HandleRight.png'></img>" +
+        "<div  '><img src='../images/HandleRight.png'></img>" +
         "<p class='small'><strong>Press the → key</strong></p></div>" +
         "</div>",
     on_finish: function (data) {
-        console.log(currentTrialNumber);
-        console.log(currentBlockNumber);
         if((currentTrialNumber % (NUMBER_OF_TRIALS / 4)) == 4){
 
             currentTrialNumber = 0;
