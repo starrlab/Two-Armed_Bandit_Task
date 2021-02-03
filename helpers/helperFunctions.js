@@ -46,3 +46,24 @@ let saveData = (function () {
         window.URL.revokeObjectURL(url);
     };
 }());
+
+function postDataToDropbox(data){
+    let jsonData = JSON.stringify({ body: data})
+    $.ajax({
+        url: "https://pqkzvfayii.execute-api.us-west-1.amazonaws.com/prod/post",
+        type: "post",
+        dataType: "json",
+        processData: false, // important
+        contentType: false, // important
+        data: jsonData,
+        success: function(text) {
+            alert(text);
+            if(text == "success") {
+                alert("Your data was uploaded successfully");
+            }
+        },
+        error: function() {
+            alert("An error occurred, please try again.");
+        }
+    });
+}
