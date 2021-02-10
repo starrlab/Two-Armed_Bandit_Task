@@ -50,11 +50,11 @@ let saveData = (function () {
 function postDataToDropbox(data){
     let jsonData = JSON.stringify({ body: data})
     $.ajax({
-        url: "https://pqkzvfayii.execute-api.us-west-1.amazonaws.com/prod/post",
+        url: "https://api.randyperrone.com/prod/post",
         type: "post",
+        crossDomain: true,
         dataType: "json",
-        processData: false, // important
-        contentType: false, // important
+        contentType: 'text/plain',
         data: jsonData,
         success: function(text) {
             alert(text);
