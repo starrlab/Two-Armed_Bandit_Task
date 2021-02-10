@@ -57,9 +57,9 @@ function postDataToDropbox(data){
         contentType: 'text/plain',
         data: jsonData,
         success: function(json) {
-            console.log(json);
-            console.log(json.body);
-            alert(json.body);
+            if(json.body == "Success") {
+                alert("Your data was uploaded successfully");
+            }
         },
         error: function() {
             alert("An error occurred while uploading your data, please let the web admin know of this issue.");
