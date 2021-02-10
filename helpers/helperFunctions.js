@@ -58,6 +58,7 @@ function postDataToDropbox(data){
         data: jsonData,
         success: function(text) {
             let json = JSON.parse(text)
+            console.log(json.body);
             alert(json.body);
         },
         error: function() {
