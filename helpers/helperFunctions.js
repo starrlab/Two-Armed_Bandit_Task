@@ -57,13 +57,11 @@ function postDataToDropbox(data){
         contentType: 'text/plain',
         data: jsonData,
         success: function(text) {
-            alert(text);
-            if(text == "success") {
-                alert("Your data was uploaded successfully");
-            }
+            let json = JSON.parse(text)
+            alert(json.body);
         },
         error: function() {
-            alert("An error occurred, please try again.");
+            alert("An error occurred while uploading your data, please let the web admin know of this issue.");
         }
     });
 }
