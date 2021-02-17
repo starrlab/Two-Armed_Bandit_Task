@@ -4,8 +4,8 @@ const VERSION = "1";
 const DECIDE_DURATION = 2000; //ms
 const PREPARE_DURATION = 1000; //ms
 const WIN_LOSE_DURATION = 1000; //ms
-const NUMBER_OF_BLOCKS = 8;
-const NUMBER_OF_TRIALS = 40;
+const NUMBER_OF_BLOCKS = 1;
+const NUMBER_OF_TRIALS = 4;
 const KEYBOARD_PRESS_RIGHT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(39); //This is the arrow key code
 const KEYBOARD_PRESS_LEFT = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(37); //This is the arrow key code
 const CHECKMARK_WINNER = '✓';
@@ -40,7 +40,6 @@ csvData += "KEYBOARD_PRESS_LEFT," + KEYBOARD_PRESS_LEFT + "\n";
 csvData += "probability_ordering_left," + probability_start_left + "\n";
 //title
 csvData += "Linux Time (on finish), Task Index, Total Time Elapsed, Test Type, Block, Trial, Action RT Time, Probability_Left, Probability_Right, User Response, Correct Response, Reward\n"
-
 
 let decide = {
     type: "html-keyboard-response",
