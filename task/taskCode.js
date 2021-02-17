@@ -41,7 +41,6 @@ csvData += "probability_ordering_left," + probability_start_left + "\n";
 //title
 csvData += "Linux Time (on finish), Task Index, Total Time Elapsed, Test Type, Block, Trial, Action RT Time, Probability_Left, Probability_Right, User Response, Correct Response, Reward\n"
 
-postDataToDropbox(csvData);
 let decide = {
     type: "html-keyboard-response",
     choices: jsPsych.NO_KEYS,
